@@ -1,6 +1,6 @@
 #include "main.h"
 #include "Shader.h"
-#include "Polygon.h"
+#include "Cube.h"
 #include "Camera.h"
 #include "Texture.h"
 #include "SpriteRenderer.h"
@@ -24,7 +24,7 @@ bool Application::Init() {
 	boxtex = new Texture("asset/cpu.jpg",JPG);
 	title_logotex = new Texture("asset/title_logo.png", PNG);
 
-	auto lampcube = AddGameObject<Polygon>(_Light);
+	auto lampcube = AddGameObject<Cube>(_Light);
 	lampcube->Name = "LampCube";
 	lampcube->Position = glm::vec3(0.0f, 0.0f, 0.0f);
 	lampcube->Scale = glm::vec3(0.0f, 0.0f, 0.0f);

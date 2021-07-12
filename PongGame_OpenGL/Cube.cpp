@@ -1,6 +1,6 @@
 #include "main.h"
 #include "Shader.h"
-#include "Polygon.h"
+#include "Cube.h"
 
 GLfloat vertices[] = {
 
@@ -52,7 +52,7 @@ GLuint indices[] = {  // Note that we start from 0!
 	   1, 2, 3  // Second Triangle
 };
 
-void Polygon::Init() {
+void Cube::Init() {
 
 	VAO = new GLuint;
 
@@ -89,12 +89,12 @@ void Polygon::Init() {
 
 }
 
-void Polygon::Uninit() {
+void Cube::Uninit() {
 
 	
 }
 
-void Polygon::Update() {
+void Cube::Update() {
 
 	if (glfwGetKey(GetWindow(), GLFW_KEY_DOWN) == GLFW_PRESS && is_light) {
 		Position.z += 0.5f;
@@ -137,7 +137,7 @@ void Polygon::Update() {
 	}
 }
 
-void Polygon::Draw(Type type,Polygon light) {
+void Cube::Draw(Type type,Cube light) {
 	
 	glm::mat4 model;
 	glm::quat q = glm::quat(glm::radians(glm::vec3(Rotation.x, Rotation.y, Rotation.z)));
@@ -191,6 +191,6 @@ void Polygon::Draw(Type type,Polygon light) {
 
 }
 
-void Polygon::SetTexture(Texture* data) {
+void Cube::SetTexture(Texture* data) {
 	this->texture = data;
 }

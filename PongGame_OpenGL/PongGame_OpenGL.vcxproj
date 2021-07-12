@@ -157,7 +157,7 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Polygon.cpp" />
+    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
@@ -180,7 +180,7 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Polygon.h" />
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SpriteRenderer.h" />

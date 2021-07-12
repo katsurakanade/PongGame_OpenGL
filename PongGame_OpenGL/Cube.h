@@ -16,7 +16,7 @@ struct Material {
 	float shininess;
 };
 
-class Polygon : public Resource
+class Cube : public Resource
 {
 
 private:
@@ -36,7 +36,7 @@ public:
 	void Init();
 	void Uninit();
 	void Update();
-	void Draw(Type type,Polygon light);
+	void Draw(Type type,Cube light);
 	void Draw() {};
 
 	void SetTexture(Texture* data);
