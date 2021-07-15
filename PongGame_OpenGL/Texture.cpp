@@ -2,11 +2,13 @@
 #include <stb/stb_image.h>
 #include "main.h"
 #include "Texture.h"
+#include <iostream>
+#include <fstream>
 
 Texture::Texture(const char* pass,TEXTURE_TYPE type) {
 
 	unsigned char* pixels = nullptr;
-
+	
 	if (type == TEXTURE_TYPE::JPG) {
 		pixels = stbi_load(pass, &width, &height, &channels, 0);
 	}
@@ -44,4 +46,27 @@ Texture::Texture(const char* pass,TEXTURE_TYPE type) {
 
 void Texture::Bind() {
 	glBindTexture(GL_TEXTURE_2D, data);
+}
+
+void Texture::ConvertToBinary(const char* path,std::string output_path, TEXTURE_TYPE type) {
+
+	unsigned char* pixels = nullptr;
+
+	if (type == TEXTURE_TYPE::JPG) {
+		pixels = stbi_load(path, &width, &height, &channels, 0);
+	}
+	else if (type == TEXTURE_TYPE::PNG) {
+		pixels = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
+	}
+
+	std::ofstream file;
+	file.open(output_path);
+	if (file.is_open()) {
+		if (type == TEXTURE_TYPE::JPG)
+			file << "JPG" << std::endl;
+		else if (type == TEXTURE_TYPE::PNG)
+			file << "PNG" << std::endl;
+		file << pixels;
+	}
+	file.close();
 }

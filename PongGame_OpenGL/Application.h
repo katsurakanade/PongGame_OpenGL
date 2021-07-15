@@ -2,6 +2,7 @@
 
 class Resource;
 class Camera;
+class Texture;
 
 enum Layer {
 	_Camera,_3D,_Light,_2D
@@ -17,6 +18,7 @@ protected:
 
 	bool mGameActive;
 	Camera* cm;
+	std::vector <Texture*> score_tex;
 
 public:
 	
@@ -24,6 +26,7 @@ public:
 	void Uninit();
 	void Update();
 	void Render();
+	int p1_score, p2_score;
 
 	template <typename T>
 	T* AddGameObject(int layer) {

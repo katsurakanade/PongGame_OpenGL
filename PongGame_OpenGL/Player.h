@@ -1,6 +1,8 @@
 #pragma once
+
 #include "SpriteRenderer.h"
 #include "Ball.h"
+
 class Player : public SpriteRenderer
 {
 

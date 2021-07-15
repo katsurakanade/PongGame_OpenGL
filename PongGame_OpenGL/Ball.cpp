@@ -19,12 +19,14 @@ void Ball::Update() {
 		SetMoveVector(glm::vec3(0, 0, 0));
 		mBallStart = false;
 		std::cout << "Player_2 Win " << std::endl;
+		GetApp()->p2_score++;
 	}
 	else if (Position.x >= SCREEN_WIDTH + 30.0f) {
 		Position = glm::vec3((SCREEN_WIDTH - 30) / 2, (SCREEN_HEIGHT - 30) / 2, 0);
 		SetMoveVector(glm::vec3(0, 0, 0));
 		mBallStart = false;
 		std::cout << "Player_1 Win " << std::endl;
+		GetApp()->p1_score++;
 	}
 
 	auto hitcheck_upwall = Hitcheck(glm::vec3(0,0,0), glm::vec3(SCREEN_WIDTH, 0, 0), Position, 15);

@@ -18,5 +18,7 @@ public:
 	Texture(const char* pass, TEXTURE_TYPE type);
 
 	void Bind();
+
+	void ConvertToBinary(const char* path,std::string output_path, TEXTURE_TYPE type);
 };
 

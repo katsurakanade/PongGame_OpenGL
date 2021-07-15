@@ -63,10 +63,10 @@ void Player::Update() {
 		float offset_y = Position.y - mptrBall->Position.y;
 		if (abs(offset_y) > 30) {
 			if (offset_y > 0) {
-				Position.y -= 35.0f;
+				Position.y -= 25.0f;
 			}
 			else if (offset_y < 0) {
-				Position.y += 35.0f;
+				Position.y += 25.0f;
 			}
 		}
 

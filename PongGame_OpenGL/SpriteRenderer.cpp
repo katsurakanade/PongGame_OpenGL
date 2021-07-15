@@ -12,7 +12,6 @@ static GLfloat vertices[] = {
     1.0f, 0.0f, 1.0f, 0.0f
 };
 
-
 void SpriteRenderer::Init() {
 
     VAO = new GLuint;
@@ -22,7 +21,7 @@ void SpriteRenderer::Init() {
     glGenBuffers(1, vertexbuffer);
 
     glBindBuffer(GL_ARRAY_BUFFER, *vertexbuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
 
     glBindVertexArray(*VAO);
     glEnableVertexAttribArray(0);
@@ -38,7 +37,8 @@ void SpriteRenderer::Init() {
 }
 
 void SpriteRenderer::Uninit() {
-
+    delete VAO;
+    delete vertexbuffer;
 }
 
 void SpriteRenderer::Update() {
@@ -61,6 +61,7 @@ void SpriteRenderer::Draw() {
    
     glUniform3f(Shader::FindUniform(ShaderGroup::Sprite, "spriteColor"), color.x, color.y, color.z);
 
+   
     if (texture) {
         glActiveTexture(GL_TEXTURE0);
         texture->Bind();

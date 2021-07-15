@@ -24,6 +24,13 @@ bool Application::Init() {
 	boxtex = new Texture("asset/cpu.jpg",JPG);
 	title_logotex = new Texture("asset/title_logo.png", PNG);
 
+	score_tex.push_back(new Texture("asset/0.png", PNG));
+	score_tex.push_back(new Texture("asset/1.png", PNG));
+	score_tex.push_back(new Texture("asset/2.png", PNG));
+	score_tex.push_back(new Texture("asset/3.png", PNG));
+	score_tex.push_back(new Texture("asset/4.png", PNG));
+	score_tex.push_back(new Texture("asset/5.png", PNG));
+
 	auto lampcube = AddGameObject<Cube>(_Light);
 	lampcube->Name = "LampCube";
 	lampcube->Position = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -40,6 +47,20 @@ bool Application::Init() {
 	ball->SetSize(glm::vec2(30, 30));
 	ball->Position = glm::vec3((SCREEN_WIDTH - 30) / 2, (SCREEN_HEIGHT - 30) / 2, 0);
 	ball->SetTexture(boxtex);
+
+	auto p1_score = AddGameObject<SpriteRenderer>(_2D);
+	p1_score->Name = "Player1_Score";
+	p1_score->SetSize(glm::vec2(100, 200));
+	p1_score->Position = glm::vec3(100,50,0);
+	p1_score->SetTexture(score_tex[0]);
+	p1_score->mActive = false;
+
+	auto p2_score = AddGameObject<SpriteRenderer>(_2D);
+	p2_score->Name = "Player2_Score";
+	p2_score->SetSize(glm::vec2(100, 200));
+	p2_score->Position = glm::vec3(SCREEN_WIDTH - 200, 50, 0);
+	p2_score->SetTexture(score_tex[0]);
+	p2_score->mActive = false;
 
 	auto player_1 = AddGameObject<Player>(_2D);
 	player_1->SetTexture(boxtex);
@@ -78,6 +99,12 @@ void Application::Uninit() {
 	delete title_logotex;
 	boxtex = nullptr;
 	title_logotex = nullptr;
+
+	for (int i = 0; i < 5; i++) {
+		delete score_tex[i];
+		score_tex[i] = nullptr;
+	}
+	score_tex.clear();
 }
 
 void Application::Update() {
@@ -103,12 +130,18 @@ void Application::Update() {
 		for (int i = 0; i < 4; i++) {
 			mGameObject[i].remove_if([](Resource* obj) {return obj->Remove(); });
 		}
+
+		// TODO: ç≈ìKâª
+		GetGameObjectWithName<SpriteRenderer>(_2D, "Player1_Score")->SetTexture(score_tex[p1_score]);
+		GetGameObjectWithName<SpriteRenderer>(_2D, "Player2_Score")->SetTexture(score_tex[p2_score]);
 	}
 
 	if (!mGameActive && glfwGetKey(GetWindow(), GLFW_KEY_SPACE) == GLFW_PRESS) {
 		mGameActive = true;
 		auto obj = GetGameObjectWithName<SpriteRenderer>(_2D, "Title_logo");
 		obj->Destroy();
+		GetGameObjectWithName<SpriteRenderer>(_2D, "Player1_Score")->mActive = true;
+		GetGameObjectWithName<SpriteRenderer>(_2D, "Player2_Score")->mActive = true;
 	}
 
 	{
